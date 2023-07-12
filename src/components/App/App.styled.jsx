@@ -6,10 +6,17 @@ export const MainContainer = styled.div`
   align-items: center;
   width: 600px;
   margin: 50px auto 0;
-  padding: 25px;
-  background-color: #21d4fd;
-  background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
-  border-radius: 20px;
+`;
+
+export const ContactsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  padding: 15px;
+  border: 2px black solid;
+  border-radius: 5px;
+  min-width: 350px;
 `;
 
 export const MainTitle = styled.h1`

@@ -8,6 +8,7 @@ import {
   MainTitle,
   ContactsTitle,
   FilterTitle,
+  ContactsContainer,
 } from './App.styled';
 
 export const App = () => {
@@ -18,9 +19,11 @@ export const App = () => {
         <MainTitle>Phonebook</MainTitle>
         <ContactForm />
         <ContactsTitle>Contacts</ContactsTitle>
-        <FilterTitle>Find contacts by name</FilterTitle>
-        <Filter />
-        <ContactList />
+        <ContactsContainer>
+          <FilterTitle>Find contacts by name</FilterTitle>
+          <Filter />
+          <ContactList />
+        </ContactsContainer>
       </MainContainer>
     </>
   );
