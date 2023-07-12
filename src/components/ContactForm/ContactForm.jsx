@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
-import { Formik, ErrorMessage } from 'formik';
-import { Button, Input, Label, StyledForm } from './ContactForm.styled';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import {
+  Button,
+  Input,
+  Label,
+  StyledForm,
+  StyledError,
+} from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
@@ -11,6 +18,17 @@ const defaultValues = {
   name: '',
   number: '',
 };
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  number: Yup.string()
+    .required('Phone number is required')
+    .matches(
+      /^[\d()+-]+$/,
+      'Phone number must contain only 0-9 and these symbols: ( ) - +'
+    )
+    .min(8, 'Phone number must be at least 8 characters'),
+});
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -30,29 +48,21 @@ export const ContactForm = () => {
   };
 
   return (
-    <Formik initialValues={defaultValues} onSubmit={handleSubmitForm}>
+    <Formik
+      initialValues={defaultValues}
+      onSubmit={handleSubmitForm}
+      validationSchema={schema}
+    >
       <StyledForm>
         <Label>
           Name
-          <Input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-          <ErrorMessage name="name" component="div" />
+          <Input type="text" name="name" />
+          <StyledError name="name" component="div" />
         </Label>
         <Label>
           Number
-          <Input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-          <ErrorMessage name="number" component="div" />
+          <Input type="tel" name="number" />
+          <StyledError name="number" component="div" />
         </Label>
         <Button type="submit">Add Contact</Button>
       </StyledForm>
