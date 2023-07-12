@@ -7,7 +7,7 @@ export const StyledForm = styled(Form)`
   flex-direction: column;
   row-gap: 10px;
   align-items: center;
-  padding: 15px;
+  padding: 20px;
   border: 2px black solid;
   border-radius: 5px;
   min-width: 350px;
@@ -52,8 +52,7 @@ export const Button = styled.button`
     background-color 250ms cubic-bezier(0.65, 0.05, 0.36, 1),
     border-color 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: white;
     background-color: black;
     border-color: white;
