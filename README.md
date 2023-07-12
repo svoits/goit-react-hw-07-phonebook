@@ -1,1 +1,1 @@
-# ⚛ React HW 07 Phonebook
+# ⚛ React Homework 07 Phonebook
