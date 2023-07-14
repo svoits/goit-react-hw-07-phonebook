@@ -32,11 +32,14 @@ export const Input = styled(Field)`
 `;
 
 export const Button = styled.button`
+  padding: 5px 10px;
+  font-family: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 5px;
 
-  min-width: 120px;
+  min-width: 140px;
   min-height: 30px;
   margin: 0;
 

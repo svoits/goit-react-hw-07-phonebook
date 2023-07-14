@@ -16,9 +16,12 @@ export const ListItem = styled.li`
 
 export const Button = styled.button`
   padding: 5px 10px;
-  min-width: 80px;
+  min-width: 100px;
   font-family: inherit;
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
 
   margin: 0;
   margin-left: auto;

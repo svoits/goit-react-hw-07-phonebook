@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { selectIsLoading, selectVisibleContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 import {
   Button,
   Input,
@@ -8,11 +13,8 @@ import {
   StyledForm,
   StyledError,
 } from './ContactForm.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
+import { Loader } from 'components/Loader';
 
 const defaultValues = {
   name: '',
@@ -32,9 +34,12 @@ const schema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectVisibleContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const [determineAddBtn, setDetermineAddBtn] = useState(false);
 
   const handleSubmitForm = (values, action) => {
+    setDetermineAddBtn(true);
     const isInContacts = contacts.some(
       ({ name }) => name.toLowerCase() === values.name.toLowerCase()
     );
@@ -43,7 +48,9 @@ export const ContactForm = () => {
       return toast.warn(`${values.name} is already in contacts.`);
     }
 
-    dispatch(addContact(values));
+    dispatch(addContact(values)).then(() => {
+      setDetermineAddBtn(false);
+    });
     action.resetForm();
   };
 
@@ -64,7 +71,10 @@ export const ContactForm = () => {
           <Input type="tel" name="number" />
           <StyledError name="number" component="div" />
         </Label>
-        <Button type="submit">Add Contact</Button>
+        <Button type="submit" disabled={isLoading && determineAddBtn}>
+          {isLoading && determineAddBtn && <Loader />}
+          Add Contact
+        </Button>
       </StyledForm>
     </Formik>
   );
