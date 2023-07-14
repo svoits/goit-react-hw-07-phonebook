@@ -6,7 +6,7 @@ import {
   selectIsLoading,
   selectVisibleContacts,
 } from 'redux/selectors';
-import { deleteContact, getAllContacts } from 'redux/operations';
+import { deleteContact, fetchContacts } from 'redux/operations';
 import { Loader } from 'components/Loader';
 
 export const ContactList = () => {
@@ -17,7 +17,7 @@ export const ContactList = () => {
   const [contactToDeleteId, setContactToDeleteId] = useState(null);
 
   useEffect(() => {
-    dispatch(getAllContacts());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   if (!visibleContacts?.length && !error & !isLoading) {
