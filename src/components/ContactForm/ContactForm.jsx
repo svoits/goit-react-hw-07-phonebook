@@ -1,7 +1,8 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { selectIsLoading, selectVisibleContacts } from 'redux/selectors';
@@ -13,7 +14,6 @@ import {
   StyledForm,
   StyledError,
 } from './ContactForm.styled';
-import { useState } from 'react';
 import { Loader } from 'components/Loader';
 
 const defaultValues = {
