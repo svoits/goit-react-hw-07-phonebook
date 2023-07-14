@@ -50,14 +50,4 @@ const contactsSlice = createSlice({
   },
 });
 
-//   [getAllContacts.pending]: handlePending,
-//   [getAllContacts.fulfilled]: handleGetAllContactsFulfilled,
-//   [getAllContacts.rejected]: handleRejected,
-//   [addContact.pending]: handlePending,
-//   [addContact.fulfilled]: handleAddContactFulfilled,
-//   [addContact.rejected]: handleRejected,
-//   [deleteContact.pending]: handlePending,
-//   [deleteContact.fulfilled]: handleDeleteContactFulfilled,
-// [deleteContact.rejected]: handleRejected,
-
 export const contactsReducer = contactsSlice.reducer;
